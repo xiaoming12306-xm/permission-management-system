@@ -38,14 +38,16 @@ public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.csrf(csrf -> csrf.disable()); // 禁用 CSRF 保护
-    http.authorizeHttpRequests(
-        auth ->
-            auth.requestMatchers("/api/**")
-                .permitAll() // 允许登录接口公开访问
-                .anyRequest()
-                .authenticated() // 其他接口需要认证
-        );
+    http.csrf(csrf -> csrf.disable()) // 禁用 CSRF 保护
+        .authorizeHttpRequests(
+            auth ->
+                auth.requestMatchers("/api/auth/login")
+                    .permitAll() // 允许登录接口公开访问
+                    .anyRequest()
+                    .authenticated() // 其他接口需要认证
+            );
+    /*.sessionManagement(
+    session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));*/
 
     return http.build();
   }

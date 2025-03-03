@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class JwtUtil {
 
   private static final String SECRET_KEY =
-      "JDJhJDEwJEVibFpxTnB0eVk4WjZYNmc3cFF6LmU4ejZaN3E3ejZaN3E3ejZaN3E3ejZaN3E3ejZaN3E3"; // 替换为你的密钥
+      "JDJhJDEwJFBuOGRrNzV5enZOZGJiZDlLZ29tNmV0UTVwdWtSWjFxendtSUo5Q2g4QmJYOUlyTVBVdVdt"; // 替换为你的密钥
   private static final long EXPIRATION_TIME = 36000000; // 10小时
 
   public String extractUsername(String token) {
