@@ -1,0 +1,4 @@
+git checkout main
+git add .
+git commit -m "更改目录"
+git push origin main
