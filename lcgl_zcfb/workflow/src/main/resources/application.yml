@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: workflow
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:6609/workflow?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: XingHuo@1988_ZYZCFB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+jpa:
+  hibernate:
+    ddl-auto: update
+  show-sql: true
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLDialect
+
+jwt:
+  secret: 'TtG8YVWQ4vxWpwJPyuHF3KmB9LzN5RdX2kSgMcAe7nZqUjE8DhQbC6KfVmYt4x3P'
+  expiration: 86400000
+
+cors:
+  allowed-origins: http://localhost:3000
+  allowed-methods: GET, POST, PUT, DELETE, OPTIONS
+  allowed-headers: Content-Type, Authorization
+  allow-credentials: true
+
+wechat:
+  corpId: 'wwf633af11fee3f170'
+  agentId: '1000048'
+  secret: 'PJFI-uRpYnTqhrcH6s3uAV6IoBGqMotBxg_T43TVmLc' 
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  type-aliases-package: com.workflow.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    com.workflow: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
