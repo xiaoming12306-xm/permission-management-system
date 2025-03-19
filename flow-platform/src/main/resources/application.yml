@@ -1,0 +1,78 @@
+# 应用配置
+spring:
+  application:
+    name: flow-platform  # 应用名称
+
+  # 数据源配置
+  datasource:
+    url: jdbc:mysql://localhost:6609/flow_platform?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: zyzcfb
+    password: XingHuo@1988_ZYZCFB
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10  # 最大连接数
+      minimum-idle: 2       # 最小空闲连接数
+      idle-timeout: 30000   # 空闲连接超时时间（毫秒）
+      max-lifetime: 1800000 # 连接最大存活时间（毫秒）
+
+  # JPA 配置
+  jpa:
+    show-sql: true  # 显示 SQL 语句
+    hibernate:
+      ddl-auto: update  # 自动更新表结构
+    properties:
+      hibernate:
+        format_sql: true  # 格式化 SQL 语句
+
+  # 文件上传配置
+  servlet:
+    multipart:
+      max-file-size: 10MB  # 单个文件最大大小
+      max-request-size: 50MB  # 请求最大大小
+
+  # 邮件配置
+  mail:
+    host: smtp.example.com  # SMTP 服务器地址
+    port: 587               # SMTP 服务器端口
+    username: noreply@example.com  # 发件人邮箱
+    password: your-email-password  # 发件人邮箱密码
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# JWT 配置
+app:
+  jwt:
+    secret: your-jwt-secret-key  # JWT 密钥
+    expiration: 86400000         # JWT 过期时间（毫秒，24小时）
+
+# 企业微信配置
+wechat:
+  corp-id: your-corp-id  # 企业 ID
+  secret: your-app-secret  # 应用密钥
+
+# 日志配置
+logging:
+  level:
+    root: INFO  # 根日志级别
+    com.flow.platform: DEBUG  # 项目包日志级别
+  file:
+    name: logs/flow-platform.log  # 日志文件路径
+    max-size: 10MB  # 单个日志文件最大大小
+    max-history: 7  # 日志文件保留天数
+
+# 服务器配置
+server:
+  port: 8080  # 服务端口
+  servlet:
+    context-path: /api  # 上下文路径
+
+# MyBatis Plus 配置
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml  # Mapper 文件路径
+  configuration:
+    map-underscore-to-camel-case: true  # 开启驼峰命名映射
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 打印 SQL 日志

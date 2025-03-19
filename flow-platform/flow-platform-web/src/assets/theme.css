@@ -1,0 +1,56 @@
+/* 主题颜色 */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+}
+
+/* 按钮主题 */
+.button-primary {
+  background-color: var(--primary-color);
+}
+
+.button-secondary {
+  background-color: var(--secondary-color);
+}
+
+.button-success {
+  background-color: var(--success-color);
+}
+
+.button-danger {
+  background-color: var(--danger-color);
+}
+
+.button-warning {
+  background-color: var(--warning-color);
+}
+
+.button-info {
+  background-color: var(--info-color);
+}
+
+/* 卡片样式 */
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.card-body {
+  font-size: 16px;
+}

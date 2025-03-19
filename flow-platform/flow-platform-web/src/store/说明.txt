@@ -1,0 +1,60 @@
+在 main.js 中使用 Vuex Store
+
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store'; // 引入 Vuex Store
+
+const app = createApp(App);
+
+// 使用 Vuex Store
+app.use(store);
+app.use(router);
+
+app.mount('#app');
+
+// 初始化认证状态
+store.dispatch('initializeAuth');
+
+
+在组件中使用 Vuex
+(1) 获取状态
+export default {
+  computed: {
+    user() {
+      return this.$store.getters.currentUser;
+    },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+};
+
+(2) 提交 Mutation
+export default {
+  methods: {
+    updateUser(user) {
+      this.$store.commit('SET_USER', user);
+    },
+  },
+};
+
+(3) 分发 Action
+export default {
+  methods: {
+    login(credentials) {
+      this.$store.dispatch('login', credentials)
+        .then(() => {
+          this.$router.push('/dashboard');
+        })
+        .catch((error) => {
+          console.error('登录失败:', error);
+        });
+    },
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push('/login');
+    },
+  },
+};
+

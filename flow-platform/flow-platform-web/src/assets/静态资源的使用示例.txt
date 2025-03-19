@@ -1,0 +1,31 @@
+(1) 在 Vue 组件中使用图片
+<template>
+  <div>
+    <img src="@/assets/images/logo.png" alt="Logo">
+  </div>
+</template>
+
+(2) 在 Vue 组件中使用样式
+<template>
+  <div class="container">
+    <button class="button button-primary">提交</button>
+  </div>
+</template>
+
+<style scoped>
+@import '@/assets/css/global.css';
+@import '@/assets/css/theme.css';
+</style>
+
+(3) 在 Vue 组件中使用字体
+<template>
+  <div class="text">
+    <i class="fas fa-user"></i> 用户信息
+  </div>
+</template>
+
+<style scoped>
+.text {
+  font-family: 'Roboto', sans-serif;
+}
+</style>

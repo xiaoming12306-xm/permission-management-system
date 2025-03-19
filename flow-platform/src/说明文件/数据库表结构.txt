@@ -1,0 +1,133 @@
+1. 数据库表结构
+
+(1) 用户表：sys_user
+CREATE TABLE `sys_user` (
+  `user_id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '用户ID',
+  `username` VARCHAR(50) UNIQUE NOT NULL COMMENT '用户名',
+  `password` VARCHAR(100) NOT NULL COMMENT '密码',
+  `email` VARCHAR(100) COMMENT '邮箱',
+  `wx_userid` VARCHAR(50) COMMENT '企业微信用户ID',
+  `status` TINYINT DEFAULT 1 COMMENT '状态（0:禁用, 1:启用）',
+  `create_time` DATETIME NOT NULL COMMENT '创建时间',
+  `update_time` DATETIME NOT NULL COMMENT '更新时间'
+) COMMENT '系统用户表';
+
+
+(2) 角色表：sys_role
+CREATE TABLE `sys_role` (
+  `role_id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '角色ID',
+  `role_name` VARCHAR(50) UNIQUE NOT NULL COMMENT '角色名称',
+  `role_key` VARCHAR(50) NOT NULL COMMENT '角色权限字符',
+  `data_scope` TINYINT DEFAULT 1 COMMENT '数据范围（1:全部, 2:自定义）',
+  `create_time` DATETIME NOT NULL COMMENT '创建时间',
+  `update_time` DATETIME NOT NULL COMMENT '更新时间'
+) COMMENT '角色表';
+
+
+(3) 权限表：sys_permission
+CREATE TABLE `sys_permission` (
+  `perm_id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '权限ID',
+  `perm_name` VARCHAR(50) NOT NULL COMMENT '权限名称',
+  `perm_key` VARCHAR(100) NOT NULL COMMENT '权限标识',
+  `create_time` DATETIME NOT NULL COMMENT '创建时间',
+  `update_time` DATETIME NOT NULL COMMENT '更新时间'
+) COMMENT '权限表';
+
+
+(4) 用户角色关联表：sys_user_role
+CREATE TABLE `sys_user_role` (
+  `user_id` BIGINT NOT NULL COMMENT '用户ID',
+  `role_id` BIGINT NOT NULL COMMENT '角色ID',
+  PRIMARY KEY (`user_id`, `role_id`)
+) COMMENT '用户角色关联表';
+
+
+(5) 角色权限关联表：sys_role_permission
+CREATE TABLE `sys_role_permission` (
+  `role_id` BIGINT NOT NULL COMMENT '角色ID',
+  `perm_id` BIGINT NOT NULL COMMENT '权限ID',
+  PRIMARY KEY (`role_id`, `perm_id`)
+) COMMENT '角色权限关联表';
+
+
+(6) 审批流程表：biz_approval_flow
+CREATE TABLE `biz_approval_flow` (
+  `flow_id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '流程ID',
+  `form_type` VARCHAR(50) NOT NULL COMMENT '表单类型',
+  `flow_name` VARCHAR(100) NOT NULL COMMENT '流程名称',
+  `config_json` JSON NOT NULL COMMENT '流程配置（JSON格式）',
+  `create_time` DATETIME NOT NULL COMMENT '创建时间',
+  `update_time` DATETIME NOT NULL COMMENT '更新时间'
+) COMMENT '审批流程配置表';
+
+
+(7) 表单数据表：biz_form_data
+CREATE TABLE `biz_form_data` (
+  `form_id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '表单ID',
+  `form_type` VARCHAR(50) NOT NULL COMMENT '表单类型',
+  `form_data` JSON NOT NULL COMMENT '表单数据（JSON格式）',
+  `submit_user` BIGINT NOT NULL COMMENT '提交人ID',
+  `current_status` VARCHAR(20) DEFAULT '待提交' COMMENT '当前状态',
+  `create_time` DATETIME NOT NULL COMMENT '创建时间',
+  `update_time` DATETIME NOT NULL COMMENT '更新时间'
+) COMMENT '业务表单数据表';
+
+
+(8) 审批记录表：biz_approval_record
+CREATE TABLE `biz_approval_record` (
+  `record_id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '记录ID',
+  `form_id` BIGINT NOT NULL COMMENT '表单ID',
+  `approver` BIGINT NOT NULL COMMENT '审批人ID',
+  `approval_result` TINYINT NOT NULL COMMENT '审批结果（0:拒绝, 1:通过）',
+  `approval_opinion` VARCHAR(500) COMMENT '审批意见',
+  `approval_time` DATETIME NOT NULL COMMENT '审批时间'
+) COMMENT '审批记录表';
+
+
+2. 表测试数据
+
+(1) 用户表测试数据
+INSERT INTO `sys_user` (`username`, `password`, `email`, `wx_userid`, `status`, `create_time`, `update_time`)
+VALUES
+  ('admin', '$2a$10$D4DKRfVU3z1fZQ7Q4XcB6eY0ZbHjvW6LkL8Jq1rRs3gXo1jKl2S', 'admin@example.com', 'WX001', 1, NOW(), NOW()),
+  ('user1', '$2a$10$D4DKRfVU3z1fZQ7Q4XcB6eY0ZbHjvW6LkL8Jq1rRs3gXo1jKl2S', 'user1@example.com', 'WX002', 1, NOW(), NOW());
+
+(2) 角色表测试数据
+INSERT INTO `sys_role` (`role_name`, `role_key`, `data_scope`, `create_time`, `update_time`)
+VALUES
+  ('管理员', 'ROLE_ADMIN', 1, NOW(), NOW()),
+  ('普通用户', 'ROLE_USER', 2, NOW(), NOW());
+
+(3) 权限表测试数据
+INSERT INTO `sys_permission` (`perm_name`, `perm_key`, `create_time`, `update_time`)
+VALUES
+  ('表单提交', 'form:submit', NOW(), NOW()),
+  ('表单审批', 'form:approve', NOW(), NOW());
+
+(4) 用户角色关联表测试数据
+INSERT INTO `sys_user_role` (`user_id`, `role_id`)
+VALUES
+  (1, 1), -- admin 是管理员
+  (2, 2); -- user1 是普通用户
+
+(5) 角色权限关联表测试数据
+INSERT INTO `sys_role_permission` (`role_id`, `perm_id`)
+VALUES
+  (1, 1), -- 管理员有表单提交权限
+  (1, 2), -- 管理员有表单审批权限
+  (2, 1); -- 普通用户有表单提交权限
+
+(6) 审批流程表测试数据
+INSERT INTO `biz_approval_flow` (`form_type`, `flow_name`, `config_json`, `create_time`, `update_time`)
+VALUES
+  ('请假申请', '请假流程', '{"nodes":[{"name":"部门审批","approvers":[2]}]}', NOW(), NOW());
+
+(7) 表单数据表测试数据
+INSERT INTO `biz_form_data` (`form_type`, `form_data`, `submit_user`, `current_status`, `create_time`, `update_time`)
+VALUES
+  ('请假申请', '{"reason":"病假","days":3}', 2, '审批中', NOW(), NOW());
+
+(8) 审批记录表测试数据
+INSERT INTO `biz_approval_record` (`form_id`, `approver`, `approval_result`, `approval_opinion`, `approval_time`)
+VALUES
+  (1, 1, 1, '同意', NOW());

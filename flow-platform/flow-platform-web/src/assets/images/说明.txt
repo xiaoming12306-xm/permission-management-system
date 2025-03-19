@@ -1,0 +1,11 @@
+(1) Logo 图片：logo.png
+用于显示网站的 Logo。
+放置在 assets/images/logo.png。
+
+(2) 背景图片：background.jpg
+用于登录页面的背景。
+放置在 assets/images/background.jpg。
+
+(3) 用户头像：avatar.png
+默认用户头像。
+放置在 assets/images/avatar.png。

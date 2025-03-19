@@ -1,0 +1,7 @@
+{
+  "menuItems": [
+    { "name": "首页", "path": "/home" },
+    { "name": "用户管理", "path": "/users" },
+    { "name": "审批流程", "path": "/approval-flows" }
+  ]
+}
