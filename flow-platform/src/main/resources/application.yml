@@ -44,15 +44,15 @@ spring:
             enable: true
 
 # JWT 配置
-app:
-  jwt:
-    secret: your-jwt-secret-key  # JWT 密钥
-    expiration: 86400000         # JWT 过期时间（毫秒，24小时）
+#app:
+#  jwt:
+#    secret: your-jwt-secret-key  # JWT 密钥
+#    expiration: 86400000         # JWT 过期时间（毫秒，24小时）
 
 # 企业微信配置
 wechat:
-  corp-id: your-corp-id  # 企业 ID
-  secret: your-app-secret  # 应用密钥
+  corp-id: wwf633af11fee3f170  # 企业 ID
+  secret: PJFI-uRpYnTqhrcH6s3uAV6IoBGqMotBxg_T43TVmLc  # 应用密钥
 
 # 日志配置
 logging:

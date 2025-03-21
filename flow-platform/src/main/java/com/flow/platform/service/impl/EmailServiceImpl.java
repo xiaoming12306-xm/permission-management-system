@@ -27,7 +27,8 @@ public class EmailServiceImpl implements EmailService {
         String subject = "新的审批请求";
         String text = "您有一个新的审批请求，表单ID：" + formId;
         approvers.forEach(approver -> {
-            String email = userService.getUserById(approver).getEmail();
+//            String email = userService.getUserById(approver).getEmail();
+            String email ="";
             sendSimpleMessage(email, subject, text);
         });
     }

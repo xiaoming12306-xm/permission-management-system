@@ -1,8 +1,11 @@
 package com.flow.platform.entity;
 
-import lombok.Data;
+import lombok.*;
+
 import java.util.List;
 
+@Getter
+@Setter
 @Data
 public class FlowConfig {
     private List<FlowNode> nodes; // 流程节点列表

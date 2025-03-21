@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
             new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-        return new JwtResponse(jwt);
+        return new JwtResponse(jwt,null,"","",null);
     }
 
     @Override

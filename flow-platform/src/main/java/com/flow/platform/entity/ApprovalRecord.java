@@ -1,8 +1,10 @@
 package com.flow.platform.entity;
 
-import lombok.Data;
+import lombok.*;
 import java.util.Date;
 
+@Getter
+@Setter
 @Data
 public class ApprovalRecord {
     private Long recordId;       // 记录ID
@@ -15,51 +17,4 @@ public class ApprovalRecord {
     public ApprovalRecord(Long formId, Long userId, boolean b, String comment) {
     }
 
-    public Long getRecordId() {
-        return recordId;
-    }
-
-    public void setRecordId(Long recordId) {
-        this.recordId = recordId;
-    }
-
-    public Long getFormId() {
-        return formId;
-    }
-
-    public void setFormId(Long formId) {
-        this.formId = formId;
-    }
-
-    public Long getApprover() {
-        return approver;
-    }
-
-    public void setApprover(Long approver) {
-        this.approver = approver;
-    }
-
-    public Boolean getApprovalResult() {
-        return approvalResult;
-    }
-
-    public void setApprovalResult(Boolean approvalResult) {
-        this.approvalResult = approvalResult;
-    }
-
-    public String getApprovalOpinion() {
-        return approvalOpinion;
-    }
-
-    public void setApprovalOpinion(String approvalOpinion) {
-        this.approvalOpinion = approvalOpinion;
-    }
-
-    public Date getApprovalTime() {
-        return approvalTime;
-    }
-
-    public void setApprovalTime(Date approvalTime) {
-        this.approvalTime = approvalTime;
-    }
 }

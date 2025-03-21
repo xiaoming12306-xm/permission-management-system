@@ -11,7 +11,6 @@ import java.util.List;
  * 日志服务类
  */
 @Service
-
 public class LogService {
 
     @Autowired

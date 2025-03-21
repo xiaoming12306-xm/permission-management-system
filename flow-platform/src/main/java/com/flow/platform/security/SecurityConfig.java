@@ -1,7 +1,5 @@
-package com.flow.platform.config;
+package com.flow.platform.security;
 
-import com.flow.platform.security.JwtAuthenticationEntryPoint;
-import com.flow.platform.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

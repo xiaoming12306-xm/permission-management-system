@@ -26,7 +26,7 @@ public class LogAspect {
     @Autowired
     private LogService logService;
 
-    @Pointcut("@annotation(com.flow.platform.annotation.Log)")
+    @Pointcut("@annotation(com.flow.platform.aspect.Log)")
     public void logPointCut() {}
 
     @Before("logPointCut()")
@@ -42,7 +42,7 @@ public class LogAspect {
         // 设置操作描述
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        com.flow.platform.annotation.Log logAnnotation = method.getAnnotation(com.flow.platform.annotation.Log.class);
+        com.flow.platform.aspect.Log logAnnotation = method.getAnnotation(com.flow.platform.aspect.Log.class);
         if (logAnnotation != null) {
             log.setOperation(logAnnotation.value());
         }
@@ -60,7 +60,7 @@ public class LogAspect {
         log.setCreateTime(new Date());
 
         // 保存日志
-        logService.save(log);
+        logService.createLog(log);
     }
 
     private String getParams(JoinPoint joinPoint) {

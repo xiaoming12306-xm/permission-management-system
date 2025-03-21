@@ -1,8 +1,6 @@
 package com.flow.platform.aspect;
 
-import com.flow.platform.annotation.RequiresPermissions;
 import com.flow.platform.exception.PermissionDeniedException;
-import com.flow.platform.util.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -15,7 +13,7 @@ import java.lang.reflect.Method;
 @Component
 public class PermissionAspect {
 
-    @Before("@annotation(com.flow.platform.annotation.RequiresPermissions)")
+    @Before("@annotation(com.flow.platform.aspect.RequiresPermissions)")
     public void doBefore(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
